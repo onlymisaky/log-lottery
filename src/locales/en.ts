@@ -31,7 +31,9 @@ export default {
     personList: 'Person List',
     winnerList: 'Winner List',
     prizeConfiguration: 'Prize Configuration',
+    resourceManagement: 'Resource Management',
     globalSetting: 'Global Configuration',
+    AbilityConfig: 'Ability Configuration',
     viewSetting: 'View Setting',
     imagesManagement: 'Images Management',
     musicManagement: 'Music Management',
@@ -43,6 +45,7 @@ export default {
     prizeManagement: 'Prize Management',
     globalSetting: 'Global Setting',
     operatingInstructions: 'Operating Instructions',
+    AbilityConfig: 'Ability Configuration',
   },
   table: {
     // person configuration
@@ -81,6 +84,7 @@ export default {
     alwaysDisplay: 'Always Display Prize List',
     selectPicture: 'Select a Picture',
     backgroundImage: 'Select Background Image',
+    barrage: 'Barrage',
   },
   dialog: {
     titleTip: 'Tip!',

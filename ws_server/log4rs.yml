@@ -1,0 +1,21 @@
+refresh_rate: 30 seconds
+appenders:
+  console:
+    kind: console
+    encoder:
+      pattern: "{d} - {l} - {m}{n}"
+  file:
+    kind: file
+    path: "application.log"
+    encoder:
+      pattern: "{d} - {l} - {m}{n}"
+loggers:
+  ws_server:
+    level: info
+    appenders:
+      - console
+      - file
+root:
+  level: error
+  appenders:
+    - console

@@ -7,6 +7,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Barrage: typeof import('./components/Barrage/index.vue')['default']
+    BulletCurtain: typeof import('./components/BulletCurtain/index.vue')['default']
     DaiysuiTable: typeof import('./components/DaiysuiTable/index.vue')['default']
     EditSeparateDialog: typeof import('./components/NumberSeparate/EditSeparateDialog.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']

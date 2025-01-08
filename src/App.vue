@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BulletCurtain from '@/components/BulletCurtain/index.vue'
 import PlayMusic from '@/components/PlayMusic/index.vue'
 import useStore from '@/store'
 import { storeToRefs } from 'pinia'
@@ -83,6 +84,7 @@ onMounted(() => {
       </div>
     </div>
   </dialog>
+  <BulletCurtain />
   <router-view />
   <PlayMusic class="absolute right-0 bottom-1/2" />
 </template>

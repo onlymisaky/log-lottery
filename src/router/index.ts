@@ -1,7 +1,7 @@
 import Layout from '@/layout/index.vue'
 import i18n from '@/locales/i18n'
 import Home from '@/views/Home/index.vue'
-import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
 export const configRoutes = {
   path: '/log-lottery/config',
@@ -43,15 +43,6 @@ export const configRoutes = {
             icon: 'already',
           },
         },
-        // {
-        //     path:'other',
-        //     name:'OtherPersonConfig',
-        //     component:()=>import('@/views/Config/Person/OtherPersonConfig.vue'),
-        //     meta:{
-        //         title:'其他配置',
-        //         icon:'other'
-        //     }
-        // }
       ],
     },
     {
@@ -66,7 +57,7 @@ export const configRoutes = {
     {
       path: '/log-lottery/config/global',
       name: 'GlobalConfig',
-      redirect: '/log-lottery/config/global/all',
+      redirect: '/log-lottery/config/global/face',
       meta: {
         title: i18n.global.t('sidebar.globalSetting'),
         icon: 'global',
@@ -82,18 +73,38 @@ export const configRoutes = {
           },
         },
         {
-          path: '/log-lottery/config/global/image',
+          path: '/log-lottery/config/global/ability',
+          name: 'AbilityConfig',
+          component: () => import('@/views/Config/Global/AbilityConfig.vue'),
+          meta: {
+            title: i18n.global.t('sidebar.AbilityConfig'),
+            icon: 'face',
+          },
+        },
+      ],
+    },
+    {
+      path: '/log-lottery/config/resource',
+      name: 'ResourceConfig',
+      redirect: '/log-lottery/config/resource/images',
+      meta: {
+        title: i18n.global.t('sidebar.resourceManagement'),
+        icon: 'global',
+      },
+      children: [
+        {
+          path: '/log-lottery/config/resource/images',
           name: 'ImageConfig',
-          component: () => import('@/views/Config/Global/ImageConfig.vue'),
+          component: () => import('@/views/Config/Resource/ImageConfig.vue'),
           meta: {
             title: i18n.global.t('sidebar.imagesManagement'),
             icon: 'image',
           },
         },
         {
-          path: '/log-lottery/config/global/music',
+          path: '/log-lottery/config/resource/musics',
           name: 'MusicConfig',
-          component: () => import('@/views/Config/Global/MusicConfig.vue'),
+          component: () => import('@/views/Config/Resource/MusicConfig.vue'),
           meta: {
             title: i18n.global.t('sidebar.musicManagement'),
             icon: 'music',
@@ -131,11 +142,11 @@ const routes = [
       configRoutes,
     ],
   },
-];
-const envMode=import.meta.env.MODE;
+]
+const envMode = import.meta.env.MODE
 const router = createRouter({
-    // 读取环境变量
-  history: envMode==='file'?createWebHashHistory():createWebHistory(),
+  // 读取环境变量
+  history: envMode === 'file' ? createWebHashHistory() : createWebHistory(),
   routes,
 })
 

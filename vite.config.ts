@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
             additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
           })
         : null,
-      // vueDevTools(),
+      vueDevTools(),
       viteCompression({
         verbose: true,
         disable: false,
@@ -79,6 +79,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         scss: {
           additionalData: '@use "@/style/global.scss" as *;',
+          api: 'modern-compiler', // or 'modern'
         },
       },
       // postcss: {

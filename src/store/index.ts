@@ -1,3 +1,4 @@
+import { useAbility } from './ability'
 import { useGlobalConfig } from './globalConfig'
 import { usePersonConfig } from './personConfig'
 import { usePrizeConfig } from './prizeConfig'
@@ -9,5 +10,6 @@ export default function useStore() {
     prizeConfig: usePrizeConfig(),
     globalConfig: useGlobalConfig(),
     system: useSystem(),
+    ability: useAbility(),
   }
 }

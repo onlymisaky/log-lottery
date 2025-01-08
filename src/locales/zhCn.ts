@@ -31,8 +31,10 @@ export default {
     personList: '人员列表',
     winnerList: '中奖人员',
     prizeConfiguration: '奖品配置',
+    resourceManagement: '资源管理',
     globalSetting: '全局配置',
     viewSetting: '界面设置',
+    AbilityConfig: '功能设置',
     imagesManagement: '图片管理',
     musicManagement: '音乐管理',
     operatingInstructions: '操作说明',
@@ -42,6 +44,7 @@ export default {
     winnerManagement: '已中奖人员管理',
     prizeManagement: '奖项配置',
     globalSetting: '全局配置',
+    AbilityConfig: '功能设置',
     operatingInstructions: '操作说明',
   },
   table: {
@@ -81,6 +84,7 @@ export default {
     alwaysDisplay: '常显奖项列表',
     selectPicture: '选择一张图片',
     backgroundImage: '选择背景图片',
+    barrage: '弹幕',
   },
   dialog: {
     titleTip: '提示!',

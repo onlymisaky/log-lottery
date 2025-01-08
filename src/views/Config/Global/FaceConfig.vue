@@ -1,6 +1,5 @@
 <script setup lang='ts'>
 import i18n, { languageList } from '@/locales/i18n'
-
 import useStore from '@/store'
 import { isHex, isRgbOrRgba } from '@/utils/color'
 import daisyuiThemes from 'daisyui/src/theming/themes'

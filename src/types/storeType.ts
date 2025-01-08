@@ -50,3 +50,9 @@ export interface IImage {
   name: string
   url: string
 }
+
+export enum IWsStatus {
+  CLOSE = 0,
+  OPEN = 1,
+  OPENING = 2,
+}
