@@ -6,7 +6,11 @@ import { onMounted, ref, watch } from 'vue'
 import vueDanmaku from 'vue3-danmaku'
 import { useI18n } from 'vue-i18n'
 
-const bullets = ref<string[]>([])
+interface Bullet {
+  text: string
+  time: string
+}
+const bullets = ref<Bullet[]>([{ text: 'asdkaksdk', time: 'dasdas' }, { text: 'kasdkaksdkas', time: 'asdkkaskdak' }])
 const bulletChannel = ref(6)
 const bulletTop = ref(10)
 const wsClient = ref<WebSocket | null>(null)
@@ -21,7 +25,7 @@ function init() {
     abilityConfig.setWsStatus(1)
   }
   wsClient.value.onmessage = (msg: MessageEvent) => {
-    bullets.value.push(msg.data)
+    bullets.value.push({ text: msg.data, time: new Date().toLocaleString() })
   }
   wsClient.value.onclose = () => {
     wsClient.value = null
@@ -41,9 +45,9 @@ watch(wsStatus, (val: IWsStatus) => {
 
 <template>
   <div class="absolute">
-    <vue-danmaku v-model:danmus="bullets" v-model:channels="bulletChannel" v-model:top="bulletTop" class="w-screen h-96">
-      <template #dm="{ item }">
-        <span>{{ item }}ppppppppppppppp</span>
+    <vue-danmaku v-model:danmus="bullets" v-model:channels="bulletChannel" v-model:top="bulletTop" :use-slot="true" class="w-screen h-12">
+      <template #dm="{ index, danmu }">
+        <span>{{ index }}{{ danmu .text }}</span>
       </template>
     </vue-danmaku>
   </div>

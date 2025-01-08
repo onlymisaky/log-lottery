@@ -139,6 +139,11 @@ const routes = [
         name: 'Demo',
         component: () => import('@/views/Demo/index.vue'),
       },
+      {
+        path: '/log-lottery/interaction',
+        name: 'Demo',
+        component: () => import('@/views/UserInteraction/index.vue'),
+      },
       configRoutes,
     ],
   },

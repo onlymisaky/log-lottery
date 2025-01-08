@@ -4,8 +4,11 @@ import PlayMusic from '@/components/PlayMusic/index.vue'
 import useStore from '@/store'
 import { storeToRefs } from 'pinia'
 import { themeChange } from 'theme-change'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const { t } = useI18n()
 const globalConfig = useStore().globalConfig
@@ -13,7 +16,7 @@ const prizeConfig = useStore().prizeConfig
 const system = useStore().system
 const { getTheme: localTheme } = storeToRefs(globalConfig)
 const { getPrizeConfig: prizeList } = storeToRefs(prizeConfig)
-
+const allowShow = ref(false)
 const tipDialog = ref()
 // const isMobileValue = ref(structuredClone(isMobile.value))
 function setLocalTheme(theme: any) {
@@ -53,10 +56,23 @@ function judgeChromeOrEdge() {
 
   return isChrome || isEdge
 }
+
+// 监听当前route
+watch(
+  () => route.path,
+  (val: string) => {
+    if (val.includes('interaction')) {
+      allowShow.value = false
+    }
+    else {
+      allowShow.value = true
+    }
+  },
+)
 onMounted(() => {
   setLocalTheme(localTheme.value)
   setCurrentPrize()
-  if (judgeMobile() || !judgeChromeOrEdge()) {
+  if (allowShow.value && (judgeMobile() || !judgeChromeOrEdge())) {
     tipDialog.value.showModal()
   }
 })
@@ -86,7 +102,7 @@ onMounted(() => {
   </dialog>
   <BulletCurtain />
   <router-view />
-  <PlayMusic class="absolute right-0 bottom-1/2" />
+  <PlayMusic v-if="allowShow" class="absolute right-0 bottom-1/2" />
 </template>
 
 <style scoped lang="scss"></style>
