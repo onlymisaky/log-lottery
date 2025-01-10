@@ -85,6 +85,8 @@ export default {
     selectPicture: '选择一张图片',
     backgroundImage: '选择背景图片',
     barrage: '弹幕',
+    barrageServer: '弹幕服务器地址',
+    
   },
   dialog: {
     titleTip: '提示!',

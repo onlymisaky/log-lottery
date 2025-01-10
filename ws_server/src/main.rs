@@ -3,6 +3,7 @@ use log4rs::init_file;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use ws::{CloseCode, Handler, Handshake, Message, Result, Sender, WebSocket};
+use clap::Parser;
 
 #[derive(Clone, PartialEq)]
 enum ConnectionType {
@@ -117,8 +118,20 @@ impl Handler for Server {
     }
 }
 
+#[derive(Parser)]
+#[command(version, author, about, long_about = None)]
+struct Cli {
+    /// local computer ip
+    #[arg(long)]
+    ip: String,
+}
 fn main() {
     init_file("log4rs.yml", Default::default()).expect("Some Error");
+
+    let cli = Cli::parse();
+    info!("ip:{}", cli.ip);
+    // 拼接cli.ip和端口3012
+    let addr = format!("{}:3012", cli.ip);
     let connections = Arc::new(Mutex::new(HashMap::new()));
     info!("Starting WebSocket server...");
     if let Err(error) = WebSocket::new(|out| Server {
@@ -126,7 +139,7 @@ fn main() {
         connections: connections.clone(),
     })
     .unwrap()
-    .listen("127.0.0.1:3012")
+    .listen(addr)
     {
         error!("Failed to create WebSocket server: {:?}", error);
     }

@@ -2,19 +2,31 @@
 import useStore from '@/store'
 import { IWsStatus } from '@/types/storeType'
 import { storeToRefs } from 'pinia'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
 const abilityConfig = useStore().ability
-const { getWsStatus: wsStatus } = storeToRefs(abilityConfig)
-
+const { getWsStatus: wsStatus, getWsIp: wsIp } = storeToRefs(abilityConfig)
+const wsIpValue = ref(structuredClone(wsIp.value))
+// const wsIp = ref('')
 function toggleWebserver(status: IWsStatus) {
   if (status !== IWsStatus.CLOSE) {
     return false
   }
   abilityConfig.setWsStatus(IWsStatus.OPENING)
 }
+function verifyIp(ip: string) {
+  // 验证ip+port格式
+  const reg = /^(?:\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d\d|2[0-4]\d|25[0-5]):\d{1,5}$/
+  return reg.test(ip)
+}
+watch(() => wsIpValue.value, (val: string) => {
+  if (verifyIp(val)) {
+    abilityConfig.setWsIp(val)
+  }
+})
 </script>
 
 <template>
@@ -39,6 +51,20 @@ function toggleWebserver(status: IWsStatus) {
           </div>
           {{ t('table.barrage') }}
         </button>
+      </div>
+    </label>
+    <label class="flex flex-row items-center w-full gap-24 mb-10 form-control">
+      <div class="">
+        <div class="label">
+          <span class="label-text">{{ t('table.barrageServer') }}</span>
+        </div>
+        <input
+          v-model="wsIpValue" type="text" :placeholder="t('table.barrageServer')" class="w-full max-w-xs input input-bordered"
+          @blur="verifyIp(wsIpValue)"
+        >
+        <div class="label">
+          <span v-if="!verifyIp(wsIpValue)" class="label-text-alt text-red-400">输入不正确</span>
+        </div>
       </div>
     </label>
   </div>

@@ -85,6 +85,7 @@ export default {
     selectPicture: 'Select a Picture',
     backgroundImage: 'Select Background Image',
     barrage: 'Barrage',
+    barrageServer: 'Barrage Server',
   },
   dialog: {
     titleTip: 'Tip!',
